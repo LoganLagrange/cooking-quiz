@@ -18,8 +18,6 @@ let questions = [
     }
 ]
 
-
-
 // Hide quiz, loss, win, and leaderboard pages by default
 var quizPage =  document.getElementById("quiz-pg");
 quizPage.style.display =  "none";
@@ -107,6 +105,7 @@ function finish(time) {
         localStorage.setItem("score", score);
         quizPage.style.display = "none";
         winPage.style.display = "flex";
+        
     } else {
         lossPage.style.display = "flex";
         quizPage.style.display = "none";
@@ -115,6 +114,15 @@ function finish(time) {
         currentQues = 0;
     }
 }
+
+var winPage = document.getElementById("win-pg");
+var nameEl = document.querySelector("#name");
+var submitEl = document.querySelector("form");
+submitEl.addEventListener("submit", function(event){
+    event.preventDefault();
+    var name = nameEl.value;
+    
+});
     
 // Grab elements for start button event listener
 var startButton = document.querySelector(".start-btn");
