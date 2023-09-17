@@ -40,17 +40,20 @@ var options = [];
 options = document.querySelectorAll(".option");
 // Keeps track of which question is currently active
 var currentQues = 0;
-// Creates default value for time to do quiz
+// Creates default value for time to do quiz and score value
 var timeLeft = 120;
+var finalScore = null;
+var timeInterval
 
 // Function that executes when start button is clicked, starts timer and displays first question
 function startQuiz() {
     startPage.style.display = "none";
     lossPage.style.display = "none";
     quizPage.style.display = "flex";
+    winPage.style.display = "none";
 
     // Timer
-    var timeInterval = setInterval(function () {
+    timeInterval = setInterval(function () {
         if (timeLeft > 1) {
             timerEl.textContent = timeLeft + " seconds remaining";
             timeLeft--;
@@ -101,11 +104,12 @@ var again = document.querySelector(".again-btn")
 
 function finish(time) {
     if (time > 0) {
-        var score = time;
-        localStorage.setItem("score", score);
+        var score = calcScore(timeLeft);
+        finalScore = score;
         quizPage.style.display = "none";
         winPage.style.display = "flex";
-        
+        clearInterval(timeInterval)
+        return score;
     } else {
         lossPage.style.display = "flex";
         quizPage.style.display = "none";
@@ -115,14 +119,48 @@ function finish(time) {
     }
 }
 
+function calcScore(time) {
+    var score = time;
+    console.log(score);
+    return score;
+}
+
+let highscores = []
+
+
 var winPage = document.getElementById("win-pg");
 var nameEl = document.querySelector("#name");
 var submitEl = document.querySelector("form");
 submitEl.addEventListener("submit", function(event){
     event.preventDefault();
-    var name = nameEl.value;
+
+    var entry = {
+        name: nameEl.value,
+        score: finalScore
+    }
+    highscores = JSON.parse(localStorage.getItem("highscores"));
+    highscores.push(entry);
+    highscores.sort(function(a, b){
+        return b.score - a.score;
+    })
+    console.log(highscores);
+    localStorage.setItem("highscores", JSON.stringify(highscores));
+
+    var leaderboardList = document.getElementById("leaderboard-ol");
+    for (var i = 0; i < highscores.length; i++) {
+        // var index = highscores[i];
+        var listEl = document.createElement("li");
+
+        listEl.textContent = highscores[i].name + " - Score:" + highscores[i].score;
+        leaderboardList.appendChild(listEl);
+    }
+    leaderboardPage.style.display = "flex";
+    winPage.style.display = "none";
     
-});
+});  
+
+
+
     
 // Grab elements for start button event listener
 var startButton = document.querySelector(".start-btn");
