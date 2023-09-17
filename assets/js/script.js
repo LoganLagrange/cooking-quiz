@@ -51,6 +51,7 @@ function startQuiz() {
     lossPage.style.display = "none";
     quizPage.style.display = "flex";
     winPage.style.display = "none";
+    leaderboardPage.style.display = "none";
 
     // Timer
     timeInterval = setInterval(function () {
@@ -65,7 +66,7 @@ function startQuiz() {
             clearInterval(timeInterval);
             finish(timeLeft);
         }
-    }, 100);
+    }, 1000);
     
     // Calls function that controls which question is displayed
     display(currentQues);
@@ -96,7 +97,7 @@ function checkAns() {
             finish(timeLeft);
         }
     } else {
-        timeLeft -= 5;
+        timeLeft -= 10;
     }
 }
 
@@ -108,7 +109,7 @@ function finish(time) {
         finalScore = score;
         quizPage.style.display = "none";
         winPage.style.display = "flex";
-        clearInterval(timeInterval)
+        
         return score;
     } else {
         lossPage.style.display = "flex";
@@ -122,6 +123,7 @@ function finish(time) {
 function calcScore(time) {
     var score = time;
     console.log(score);
+    // clearInterval(timeInterval)
     return score;
 }
 
@@ -138,7 +140,7 @@ submitEl.addEventListener("submit", function(event){
         name: nameEl.value,
         score: finalScore
     }
-    highscores = JSON.parse(localStorage.getItem("highscores"));
+    highscores = JSON.parse(localStorage.getItem("highscores")) || [];
     highscores.push(entry);
     highscores.sort(function(a, b){
         return b.score - a.score;
@@ -156,7 +158,8 @@ submitEl.addEventListener("submit", function(event){
     }
     leaderboardPage.style.display = "flex";
     winPage.style.display = "none";
-    
+    var again2 = document.querySelector(".again-btn2");
+    again2.addEventListener("click" , startQuiz);
 });  
 
 
