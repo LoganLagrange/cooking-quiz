@@ -20,7 +20,7 @@ let questions = [
 
 
 
-// Hide quiz, loss, and leaderboard pages by default
+// Hide quiz, loss, win, and leaderboard pages by default
 var quizPage =  document.getElementById("quiz-pg");
 quizPage.style.display =  "none";
 
@@ -29,6 +29,9 @@ leaderboardPage.style.display =  "none";
 
 var lossPage = document.getElementById("loss-pg")
 lossPage.style.display = "none";
+
+var winPage = document.getElementById("win-pg")
+winPage.style.display = "none";
 
 // Grab timer heading
 var timerEl = document.getElementById("countdown");
@@ -101,7 +104,9 @@ var again = document.querySelector(".again-btn")
 function finish(time) {
     if (time > 0) {
         var score = time;
-        console.log(score);
+        localStorage.setItem("score", score);
+        quizPage.style.display = "none";
+        winPage.style.display = "flex";
     } else {
         lossPage.style.display = "flex";
         quizPage.style.display = "none";
@@ -111,8 +116,6 @@ function finish(time) {
     }
 }
     
-
-
 // Grab elements for start button event listener
 var startButton = document.querySelector(".start-btn");
 var startPage = document.getElementById("start-pg");
