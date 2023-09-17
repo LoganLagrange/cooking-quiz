@@ -14,7 +14,7 @@ h1 {
     padding: 2vh;
 }
 
-#start-pg {
+.page, #timer-card, #question-card, #leaderboard-ol {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -24,16 +24,23 @@ h1 {
     align-self: center;
     margin-left: auto;
     margin-right: auto;
+    border: solid black 2px;
+    margin-top: 30px;
+    border-radius: 10px;
 }
 
-.start-btn, .again-btn, .again-btn2 {
+#leaderboard-pg {
+    border: none;
+}
+
+.start-btn, .again-btn, .again-btn2, .option, #submit {
     background-color: black;
     color: white;
     font-size: 24px;
     border-radius: 10px;
 }
 
-.start-btn:active, .again-btn:active, .again-btn2:active {
+.start-btn:active, .again-btn:active, .again-btn2:active, #submit:active {
     background-color: white;
     color: black;
 }
@@ -45,78 +52,6 @@ h1 {
     align-items: center;
     padding: 20px;
     max-width: 70%;
-    align-self: center;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#leaderboard-pg {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    max-width: 50%;
-    align-self: center;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#timer-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    max-width: 50%;
-    align-self: center;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#question-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    max-width: 50%;
-    align-self: center;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#loss-pg {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    max-width: 50%;
-    align-self: center;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#win-pg {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    max-width: 50%;
-    align-self: center;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#leaderboard-ol {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    max-width: 50%;
     align-self: center;
     margin-left: auto;
     margin-right: auto;

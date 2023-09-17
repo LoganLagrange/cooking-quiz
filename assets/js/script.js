@@ -40,10 +40,10 @@ var options = [];
 options = document.querySelectorAll(".option");
 // Keeps track of which question is currently active
 var currentQues = 0;
-// Creates default value for time to do quiz and score value
+// Creates default value for time to do quiz and score value, initializes timeInterval in global scope
 var timeLeft = 120;
 var finalScore = null;
-var timeInterval
+var timeInterval;
 
 // Function that executes when start button is clicked, starts timer and displays first question
 function startQuiz() {
@@ -75,7 +75,7 @@ function startQuiz() {
     }
 }
     
-    
+// Displays content to questions option buttons
 function display(index) {
     var ques = questions[index];
     questionHeader.textContent = ques.question;
@@ -85,12 +85,15 @@ function display(index) {
     }
 }
 
+// Check that the option the user selects matches the answer
+var incorrectNotify =  document.getElementById("incorrect-notify");
 function checkAns() {
     var userSelect = this.textContent;
     ques = questions[currentQues];
-
+    // Determines if the answer matches and moves on if it does or penalizes and notifies if it doesn't
     if (userSelect === ques.answer) {
         currentQues++;
+        incorrectNotify.textContent = "";
         if (currentQues < questions.length)  {
             display(currentQues);
         } else {
@@ -98,11 +101,13 @@ function checkAns() {
         }
     } else {
         timeLeft -= 10;
+        incorrectNotify.textContent = "INCORRECT";
     }
 }
 
+// grabs play again button
 var again = document.querySelector(".again-btn")
-
+// Function that controls what happens when the games ends either because all questions answered correctly or times runs out.
 function finish(time) {
     if (time > 0) {
         var score = calcScore(timeLeft);
@@ -120,6 +125,7 @@ function finish(time) {
     }
 }
 
+// Calculates the score and returns
 function calcScore(time) {
     var score = time;
     console.log(score);
@@ -127,37 +133,43 @@ function calcScore(time) {
     return score;
 }
 
+// Intialize the highscores array
 let highscores = []
-
-
+// Grabs elements associated with the form to enter name
 var winPage = document.getElementById("win-pg");
 var nameEl = document.querySelector("#name");
 var submitEl = document.querySelector("form");
+
+// Event listener on the form for submission
 submitEl.addEventListener("submit", function(event){
     event.preventDefault();
-
+    // Creates an entry object
     var entry = {
         name: nameEl.value,
         score: finalScore
     }
+    // Pulls any existing scores from local storage
     highscores = JSON.parse(localStorage.getItem("highscores")) || [];
+    // Pushes entry object into highscores array
     highscores.push(entry);
+    // Sorts highscores array
     highscores.sort(function(a, b){
         return b.score - a.score;
     })
     console.log(highscores);
+    // Re-stores updated and sorted highscores
     localStorage.setItem("highscores", JSON.stringify(highscores));
-
+    // Loop to create list elements for all highscores and append to page
     var leaderboardList = document.getElementById("leaderboard-ol");
     for (var i = 0; i < highscores.length; i++) {
         // var index = highscores[i];
         var listEl = document.createElement("li");
-
         listEl.textContent = highscores[i].name + " - Score:" + highscores[i].score;
         leaderboardList.appendChild(listEl);
     }
     leaderboardPage.style.display = "flex";
     winPage.style.display = "none";
+    // Event listener for play again button on leaderboard page
     var again2 = document.querySelector(".again-btn2");
     again2.addEventListener("click" , startQuiz);
 });  

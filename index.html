@@ -11,7 +11,8 @@
         <h1>Cooking Quiz</h1>
     </header>
 
-    <section id="start-pg">
+    <!-- Start Page -->
+    <section id="start-pg" class="page">
         <button class="start-btn">Start Quiz</button>
         <h2>Instructions</h2>
         <p>
@@ -21,15 +22,17 @@
         </p>
     </section>
 
+    <!-- QUIZ page with question and options as well as timer -->
     <section id="quiz-pg">
         <div id="question-card">
-            <h4 id="question-header"></h4>
+            <h3 id="question-header"></h3>
             <div id="choices-card">
                 <button class="option"></button>
                 <button class="option"></button>
                 <button class="option"></button>
                 <button class="option"></button>
             </div>
+            <h4 id="incorrect-notify"></h4>
         </div>
         <div id="timer-card">
             <h2>Time Remaining</h2>
@@ -37,12 +40,14 @@
         </div>
     </section>
 
-    <section id="loss-pg">
+    <!-- Page that  displays in case of loss -->
+    <section id="loss-pg" class="page">
         <button class="again-btn">Play Again</button>
         <h2>GAME OVER</h2>
     </section>
 
-    <section id="win-pg">
+    <!-- Page that displays in case of win -->
+    <section id="win-pg" class="page">
         <h2>You Win!</h2>
         <h2>Enter your name to save your score!</h2>
         <form>
@@ -52,7 +57,8 @@
         </form>
     </section>
 
-    <section id="leaderboard-pg">
+    <!-- Leaderboard page -->
+    <section id="leaderboard-pg" class="page">
         <button class="again-btn2">Play Again</button>
         <h2>Leaderboard</h2>
         <ol id="leaderboard-ol"></ol>
