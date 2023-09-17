@@ -20,31 +20,18 @@ let questions = [
 
 
 
-// Hide quiz and leaderboard pages by default
+// Hide quiz, loss, and leaderboard pages by default
 var quizPage =  document.getElementById("quiz-pg");
 quizPage.style.display =  "none";
 
 var leaderboardPage = document.getElementById("leaderboard-pg");
 leaderboardPage.style.display =  "none";
 
+var lossPage = document.getElementById("loss-pg")
+lossPage.style.display = "none";
+
 // Grab timer heading
 var timerEl = document.getElementById("countdown");
-// Function for timer
-function countdown() {
-    var timeInterval = setInterval(function () {
-        if (timeLeft > 1) {
-            timerEl.textContent = timeLeft + " seconds remaining";
-            timeLeft--;
-        } else if (timeLeft === 1) {
-            timerEl.textContent =  timeLeft + " second remaining";
-            timeLeft--;
-        } else {
-            timerEl.textContent = "Time's Up!";
-            clearInterval(timeInterval);
-        }
-    }, 1000);
-}
-
 // Grabs question header
 var questionHeader = document.getElementById("question-header");
 // Grabs option buttons and stores in an array
@@ -57,6 +44,10 @@ var timeLeft = 120;
 
 // Function that executes when start button is clicked, starts timer and displays first question
 function startQuiz() {
+    startPage.style.display = "none";
+    lossPage.style.display = "none";
+    quizPage.style.display = "flex";
+
     // Timer
     var timeInterval = setInterval(function () {
         if (timeLeft > 1) {
@@ -68,9 +59,9 @@ function startQuiz() {
         } else {
             timerEl.textContent = "Time's Up!";
             clearInterval(timeInterval);
-            finish();
+            finish(timeLeft);
         }
-    }, 1000);
+    }, 100);
     
     // Calls function that controls which question is displayed
     display(currentQues);
@@ -98,15 +89,26 @@ function checkAns() {
         if (currentQues < questions.length)  {
             display(currentQues);
         } else {
-            finish();
+            finish(timeLeft);
         }
     } else {
         timeLeft -= 5;
     }
 }
 
-function finish() {
-    
+var again = document.querySelector(".again-btn")
+
+function finish(time) {
+    if (time > 0) {
+        var score = time;
+        console.log(score);
+    } else {
+        lossPage.style.display = "flex";
+        quizPage.style.display = "none";
+        again.addEventListener("click", startQuiz)
+        timeLeft = 120;
+        currentQues = 0;
+    }
 }
     
 
@@ -116,8 +118,5 @@ var startButton = document.querySelector(".start-btn");
 var startPage = document.getElementById("start-pg");
 // Event  listener for start button
 startButton.addEventListener("click", function() {
-    // countdown();
-    startPage.style.display = "none";
-    quizPage.style.display = "flex";
     startQuiz()
 })

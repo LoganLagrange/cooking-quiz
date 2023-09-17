@@ -26,14 +26,14 @@ h1 {
     margin-right: auto;
 }
 
-.start-btn {
+.start-btn, .again-btn{
     background-color: black;
     color: white;
     font-size: 24px;
     border-radius: 10px;
 }
 
-#start-btn:active {
+.start-btn:active, .again-btn:active {
     background-color: white;
     color: black;
 }
@@ -75,6 +75,18 @@ h1 {
 }
 
 #question-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    max-width: 50%;
+    align-self: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#loss-pg {
     display: flex;
     flex-direction: column;
     justify-content: center;
