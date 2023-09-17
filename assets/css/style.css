@@ -14,7 +14,7 @@ h1 {
     padding: 2vh;
 }
 
-.start-pg {
+#start-pg {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -33,12 +33,24 @@ h1 {
     border-radius: 10px;
 }
 
-.start-btn:active {
+#start-btn:active {
     background-color: white;
     color: black;
 }
 
-.quiz-pg {
+#quiz-pg {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    max-width: 70%;
+    align-self: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#leaderboard-pg {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -50,7 +62,19 @@ h1 {
     margin-right: auto;
 }
 
-.leaderboard-pg {
+#timer-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    max-width: 50%;
+    align-self: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#question-card {
     display: flex;
     flex-direction: column;
     justify-content: center;
